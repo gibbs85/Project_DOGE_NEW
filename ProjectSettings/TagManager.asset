@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - inAppBG
+  - Water
+  - UI
+  - inAppLogo
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: inAppBG
+    uniqueID: 1574551967
+    locked: 0
+  - name: inAppContent
+    uniqueID: 553598943
+    locked: 0
+  - name: inAppLogo
+    uniqueID: 7006603
+    locked: 0
+  - name: PhoneBtn
+    uniqueID: 789985381
+    locked: 0
