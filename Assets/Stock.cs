@@ -332,6 +332,11 @@ namespace StockDOGE
             return this.gaussStd;
         }
 
+        public string getDesc()
+        {
+            return this.description;
+        }
+
         public void setMean(double mean)
         {
             this.gaussMean = mean;
