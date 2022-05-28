@@ -11,7 +11,8 @@ enum SettingsStock
     RECORD_LENGTH_MAX = 100000,
     COUNT_UPDATE_PER_HOUR = 60,
     COUNT_HOUR_PER_DAY = 24,
-    COUNT_UPDATE_DAYS_PREPLAY = 30
+    COUNT_UPDATE_DAYS_PREPLAY = 30,
+    TIME_START_OF_DAY = 9
     //COUNT_TIME_PER_DAY = 3
 }
 
@@ -94,6 +95,45 @@ public class Stocks : MonoBehaviour
     public Stock getStockByIndex(int index)
     {
         return this.stocks[index];
+    }
+
+    public Stock getStockByName(string name)
+    {
+        for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
+            if (name.Equals(this.stocks[i].getName()))
+                return stocks[i];
+
+        Stock noResult = new Stock("NOSTOCK", 0);
+        return noResult;
+    }
+
+    public double[] getRecordDay(Stock stock, int time)
+    {
+        double[] result;
+        int countUpdates = (time - (int)SettingsStock.TIME_START_OF_DAY) * (int)SettingsStock.COUNT_UPDATE_PER_HOUR;
+        if (stock.getUpdateCount() < countUpdates)
+            countUpdates = stock.getUpdateCount();
+        result = new double[countUpdates];
+        for (int i = 0; i< countUpdates; i++)
+        {
+            result[^(i + 1)] = stock.getPriceRecord()[^(i + 1)];
+        }
+        return result;
+    }
+
+    public double getRateDay(Stock stock, int time)
+    {
+        double priceStart;
+        double priceNow;
+        double rate;
+
+        double[] record = this.getRecordDay(stock, time);
+        priceStart = record[0];
+        priceNow = record[^1];
+        rate = ((priceNow - priceStart)/priceStart)*100;
+
+        return rate;
+
     }
 
     //public  double[] getRecordPriceNdays(Stock stock, int days)
