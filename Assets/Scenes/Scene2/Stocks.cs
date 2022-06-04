@@ -75,6 +75,19 @@ public class Stocks : MonoBehaviour
         }
     }
 
+    public void UpdateAllStocks(int timeInterval)
+    {
+        for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
+        //모든 주식에 대해
+        {
+            for (int j = 0; j < (int)SettingsStock.COUNT_UPDATE_PER_HOUR * timeInterval; j++)
+            //1시간당 업데이트 횟수 * timeInterval
+            {
+                stocks[i].updateGaussian();
+            }
+        }
+    }
+
     public int getStocksCount()
     {
         return this.stocks.Length;
