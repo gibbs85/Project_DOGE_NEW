@@ -154,7 +154,6 @@ public class Player : MonoBehaviour
         GameObject.Find("Stocks").GetComponent<Stocks>().UpdateAllStocks(Time - TimeTurns[Turn - 1]);
         SetTextTime();
         refresh();
-        print(Time);
 
     }
 
@@ -183,6 +182,6 @@ public class Player : MonoBehaviour
 
     public void refresh()
     {
-        GameObject.Find("SecuritiesStockListAll").GetComponent<SecuritiesStockListAll>().refresh();
+        GameObject.Find("StockListAll").GetComponent<SecuritiesStockListAll>().refresh();
     }
 }
