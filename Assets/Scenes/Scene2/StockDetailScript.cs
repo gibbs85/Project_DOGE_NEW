@@ -19,15 +19,4 @@ public class StockDetailScript : MonoBehaviour
     {
         return GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(this.stockName);
     }
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = this.stock.getName();
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 }

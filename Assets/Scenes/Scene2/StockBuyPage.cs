@@ -33,7 +33,6 @@ public class StockBuyPage : MonoBehaviour
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
-        //this.stockPrice = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice();
         this.stockPriceCaled = this.stockPrice * this.stockCount;
 
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyCount").GetComponentInChildren<TextMeshProUGUI>().text = this.stockCount + "주";
@@ -58,12 +57,6 @@ public class StockBuyPage : MonoBehaviour
 
     public void inputHandle(string input)
     {
-        //string test = "TEST";
-        //print(test);
-        //test = test.Substring(0, test.Length-1);
-        //print(test);
-
-
         if (input.Equals("99"))
         {
             if (this.inputProcessed.Equals("0"))
@@ -101,5 +94,14 @@ public class StockBuyPage : MonoBehaviour
         this.stockCount = Int32.Parse(this.inputProcessed);
 
         this.refresh();
+    }
+
+    public void BuyConfirmClicked()
+    {
+        if (this.stockPriceCaled > GameObject.Find("Player").GetComponent<Player>().GetMoney()) // 구매할 돈 없음
+            return;
+
+        GameObject.Find("Stocks").GetComponent<Stocks>().BuyStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
+        GameObject.Find("Player").GetComponent<Player>().SetMoney(GameObject.Find("Player").GetComponent<Player>().GetMoney() - this.stockPriceCaled);
     }
 }

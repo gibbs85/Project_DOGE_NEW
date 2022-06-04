@@ -39,15 +39,6 @@ public class StockDetailDisplay : MonoBehaviour
 
         GameObject.Find("StockDetailDesc").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getDesc();
 
-        //
-        print("LISDTL DAY"+ GameObject.Find("Player").GetComponent<Player>().GetDay() + "LISDTL TIME: " + GameObject.Find("Player").GetComponent<Player>().GetTime());
-        //
-
-        //var plt = new ScottPlot.Plot(600, 400);
-        //plt.AddSignal(GameObject.Find("Stocks").GetComponent<Stocks>().getRecordDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock, 15));
-        //plt.SaveFig("StockGraph");
-
-
 
 
     }

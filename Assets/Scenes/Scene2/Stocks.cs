@@ -155,6 +155,68 @@ public class Stocks : MonoBehaviour
         }
     }
 
+    /*
+     * 총 매입금액
+     */
+    public int MoneyBought()
+    {
+        int result = 0;
+
+        for (int i = 0; i < this.stocksOwn.Length; i++)
+        {
+            result += this.stocksOwn[i].moneySpent;
+        }
+        return result;
+    }
+    /*
+     * 특정 주식 총 매입 금액
+     */
+    public int MoneyBought(string stockName)
+    {
+        int result = 0;
+
+        for (int i = 0; i < this.stocksOwn.Length; i++)
+        {
+            if (stocksOwn[i].stock.getName().Equals(stockName))
+                result = stocksOwn[i].moneySpent;
+        }
+
+        return result;
+    }
+
+
+
+    /* 
+     * 총 평가금액
+     */
+    public int MoneySellAll()
+    {
+        int result = 0;
+
+        for(int i = 0; i < stocksOwn.Length; i++)
+        {
+            int price = (int)(stocksOwn[i].stock.getPrice()) * stocksOwn[i].count;
+            result += price;
+        }
+
+        return result;
+    }
+
+    /*
+     * 특정 주식 평단가
+     */
+    public int MoneyAvg(string stockName)
+    {
+        int result = 0;
+        for (int i = 0; i < this.stocksOwn.Length; i++)
+        {
+            if (stocksOwn[i].stock.getName().Equals(stockName))
+                result = stocksOwn[i].moneySpent / stocksOwn[i].count;
+        }
+        return result;
+    }
+
+
     public void UpdateAllStocks(int timeInterval)
     {
         for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
