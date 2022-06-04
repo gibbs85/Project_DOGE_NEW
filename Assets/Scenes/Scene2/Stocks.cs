@@ -155,6 +155,18 @@ public class Stocks : MonoBehaviour
         }
     }
 
+    public void SellStock(Stock stock, int count)
+    {
+        for (int i = 0; i < stocksOwn.Length; i++)
+        {
+            if (stocksOwn[i].stock.getName().Equals(stock.getName()))
+            {
+                stocksOwn[i].moneySpent -= (int)(this.MoneyAvg(stock.getName()) * count);
+                stocksOwn[i].count -= count;
+            }
+        }
+    }
+
     /*
      * ÃÑ ¸ÅÀÔ±Ý¾×
      */
@@ -211,7 +223,20 @@ public class Stocks : MonoBehaviour
         for (int i = 0; i < this.stocksOwn.Length; i++)
         {
             if (stocksOwn[i].stock.getName().Equals(stockName))
+            {
                 result = stocksOwn[i].moneySpent / stocksOwn[i].count;
+            }
+        }
+        return result;
+    }
+
+    public int CountOwn(string stockName)
+    {
+        int result = 0;
+        for (int i = 0; i < this.stocksOwn.Length; i++)
+        {
+            if (stocksOwn[i].stock.getName().Equals(stockName))
+                result = stocksOwn[i].count;
         }
         return result;
     }
@@ -228,7 +253,7 @@ public class Stocks : MonoBehaviour
                 stocks[i].updateGaussian();
             }
         }
-        print("UPDATED");
+        //print("UPDATED");
     }
 
     public int getStocksCount()

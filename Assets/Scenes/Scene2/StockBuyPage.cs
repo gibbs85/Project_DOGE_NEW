@@ -106,7 +106,11 @@ public class StockBuyPage : MonoBehaviour
         if (this.stockPriceCaled > GameObject.Find("Player").GetComponent<Player>().GetMoney()) // 구매할 돈 없음
             return;
 
+        if (GameObject.Find("Player").GetComponent<Player>().useTired(1) == false)
+            return;
+
         GameObject.Find("Stocks").GetComponent<Stocks>().BuyStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
         GameObject.Find("Player").GetComponent<Player>().SetMoney(GameObject.Find("Player").GetComponent<Player>().GetMoney() - this.stockPriceCaled);
+        this.refresh();
     }
 }

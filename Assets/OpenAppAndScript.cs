@@ -8,4 +8,9 @@ public class OpenAppAndScript : MonoBehaviour
     {
         GameObject.Find("AppStock").transform.Find("StockBuyPage").GetComponent<StockBuyPage>().init();
     }
+
+    public void initSellPage()
+    {
+        GameObject.Find("AppStock").transform.Find("StockSellPage").GetComponent<StockSellPage>().init();
+    }
 }

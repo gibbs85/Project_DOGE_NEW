@@ -11,10 +11,10 @@ public class Player : MonoBehaviour
     public static int Saving = 0;
     public static int Investment = 0;
     public static int Day = 2; //0=토요일, 2=월요일 .... 6 = 금요일
-    public static int Date = 0;
+    public static int Date = -1;
     public static int Tired = 5;
 
-    /*
+    /*////////////////////////////////////////////////////////////////////////
      * 업데이트.
      * 2022.06.04
      * 
@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
      * void refresh() 추가
      * 
      * 작성자. 박동옥
-     */
+     *//// <summary>
+     /// /////////////////////////////////////////////////////////////////////
+     /// </summary>
     public static int DateEndGame = 31; // 마지막 날.
     public static int Time = (int)SettingsStock.TIME_START_OF_DAY; // 첫 시간
     public static int[] TimeTurns = { (int)SettingsStock.TIME_START_OF_DAY, 10, 13, 15 }; // 턴 마다의 시간
@@ -42,8 +44,16 @@ public class Player : MonoBehaviour
     public Text remMoney;
     public Text tired;
 
+    /*////////////////////////////////////////////////////////////////////////
+     * 
+     * void Start() 가 두 번 실행되는데 이유를 찾지 못함.
+     * 
+     *////////////////////////////////////////////////////////////////////////
+
+
     void Start()
     {
+        print("Start");
         InitPlay();
     }
     void Update()
@@ -98,8 +108,17 @@ public class Player : MonoBehaviour
         Tired = a;
     }
     /////////////////////////////////////////////
+    public bool useTired(int tired)
+    {
+        if (Tired < tired)
+            return false;
+        Tired -= tired;
+        return true;
+    }
+    
     public void nextDay()
     {
+        print("nextDay");
         /*
          * 시간과 턴, 주식 업데이트 추가
          */
@@ -144,6 +163,7 @@ public class Player : MonoBehaviour
      */
     public void nextTime()
     {
+        print("nextTime: " + Time);
         Turn++;
         if (Turn >= TimeTurns.Length)
         {
@@ -159,7 +179,8 @@ public class Player : MonoBehaviour
 
     public void InitPlay()
     {
-        nextDay();
+        print("InitPlay");
+        this.nextDay();
     }
 
     public void SetTextTime()

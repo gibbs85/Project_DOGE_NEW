@@ -43,7 +43,7 @@ public class SecuritiesStockListAll : MonoBehaviour
             double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Player").GetComponent<Player>().GetTime());
 
             GameObject btn = Resources.Load<GameObject>("Prefabs/StockButtonContentListAll");
-            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("Viewport").transform.Find("Content"));
+            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("StockListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
             Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i).getName();
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = ((int)GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i).getPrice()).ToString("c", numberFormat)
                 + "(" + rate.ToString("F2") + "%)";
@@ -62,8 +62,6 @@ public class SecuritiesStockListAll : MonoBehaviour
             }
 
         }
-
-        print("LISALL DAY" + GameObject.Find("Player").GetComponent<Player>().GetDay() + " LISALL TIME: " + GameObject.Find("Player").GetComponent<Player>().GetTime());
 
     }
 

@@ -31,7 +31,6 @@ public class StockListOwned : MonoBehaviour
         this.moneySellAll = GameObject.Find("Stocks").GetComponent<Stocks>().MoneySellAll();
         this.moneyProfit = this.moneySellAll - this.moneySpentAll;
         this.profitRate = ((double)this.moneyProfit / (double)this.moneySpentAll) * 100;
-        print("PRFRTE : " + this.profitRate);
 
         GameObject.Find("StockListOwnMoneySpentAll").GetComponentInChildren<TextMeshProUGUI>().text = this.moneySpentAll.ToString("c", numberFormat);
         GameObject.Find("StockListOwnMoneySellAll").GetComponentInChildren<TextMeshProUGUI>().text = this.moneySellAll.ToString("c", numberFormat); ;
