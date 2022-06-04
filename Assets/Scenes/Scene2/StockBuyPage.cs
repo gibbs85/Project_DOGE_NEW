@@ -29,6 +29,11 @@ public class StockBuyPage : MonoBehaviour
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyPriceCaled").GetComponentInChildren<TextMeshProUGUI>().text = this.stockPriceCaled.ToString("c", numberFormat);
     }
 
+    void OnEnable()
+    {
+        this.refresh();
+    }
+
     public void refresh()
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;

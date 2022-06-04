@@ -17,6 +17,11 @@ public class SecuritiesStockListAll : MonoBehaviour
         this.refresh();
     }
 
+    void OnEnable()
+    {
+        this.refresh();
+    }
+
     public void refresh()
     {
         /*
@@ -64,6 +69,7 @@ public class SecuritiesStockListAll : MonoBehaviour
 
     public void delete()
     {
+
         int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
 
         for (int i = 0; i < countchild; i++)

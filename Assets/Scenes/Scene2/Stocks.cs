@@ -30,13 +30,13 @@ public class Stocks : MonoBehaviour
 
     private Stock[] stocks;
 
-    struct StockBought
+    public struct StockBought
     {
         public Stock stock;
         public int count;
         public int moneySpent;
     }
-    private StockBought[] stocksOwn;
+    public StockBought[] stocksOwn;
 
     void Start()
     {

@@ -11,17 +11,6 @@ public class TabClickStocksAll : MonoBehaviour
     {
         GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(false);
         GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(true);
-        //if (isOn){
-        //    Debug.Log("TabAllTrue");
-        //    GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(false);
-        //    GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(true); 
-        //}
-        //else
-        //{
-        //    Debug.Log("TabAllFalse");
-        //    GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(true);
-        //    GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
-        //}
 
     }
 }

@@ -15,6 +15,11 @@ public class StockDetailDisplay : MonoBehaviour
     //    this.refresh();
     //}
 
+    void OnEnable()
+    {
+        this.refresh();
+    }
+
     public void refresh()
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;

@@ -9,18 +9,6 @@ public class TabClickStockOwned : MonoBehaviour
     {
         GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(true);
         GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
-        //if (isOn)
-        //{
-        //    Debug.Log("TabOwnTrue");
-        //    GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(true);
-        //    GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    Debug.Log("TabOwnFalse");
-        //    GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(true);
-        //    GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
-        //}
-
+        GameObject.Find("AppStock").transform.Find("StockListOwned").GetComponent<StockListOwned>().init();
     }
 }
