@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     public static int Saving = 0;
     public static int Investment = 0;
     public static int Day = 2; //0=토요일, 2=월요일 .... 6 = 금요일
-    public static int Date = 30;
+    public static int Date = 1;
     public static int Tired = 5;
+
+    public static int DateEndGame = 31; // 마지막 날. 박동옥이 추가.
 
     public Text dday;
     public Text date;
@@ -70,9 +72,16 @@ public class Player : MonoBehaviour
         Tired = 5;
         tired.text = "피로도 (" + Tired.ToString() + "/5)";
 
-        Date--;
-        dday.text = "D-" + Date.ToString();
-        
+        //Date--;
+        //dday.text = "D-" + Date.ToString();
+
+        /*
+         * Date++ 방식으로 변경. 박동옥이 업데이트.
+         */
+        Date++;
+        print(Date);
+        dday.text = "D-" + (DateEndGame - Date).ToString();
+
         Day++;
         if (Day == 6)   //만약 금요일이면
         {
@@ -91,6 +100,6 @@ public class Player : MonoBehaviour
         else if (Day == 5) date.text = "목요일";
         else if (Day == 6) date.text = "금요일";
 
-        print(Day);
+        //print(Day);
     }
 }
