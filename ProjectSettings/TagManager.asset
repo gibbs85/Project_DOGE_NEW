@@ -13,7 +13,7 @@ TagManager:
   - UI
   - inAppLogo
   - inAppContent
-  - 
+  - AppBank
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: PhoneBtn
     uniqueID: 789985381
+    locked: 0
+  - name: AppBank
+    uniqueID: 2061283953
     locked: 0
