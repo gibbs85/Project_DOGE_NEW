@@ -10,18 +10,18 @@ public class StockDetailDisplay : MonoBehaviour
 {
     NumberFormatInfo numberFormat;
     // Start is called before the first frame update
-    void Start()
-    {
-        this.refresh();
-    }
+    //void Start()
+    //{
+    //    this.refresh();
+    //}
 
-    void refresh()
+    public void refresh()
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
-        double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock, 15);
+        double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), GameObject.Find("Player").GetComponent<Player>().GetTime());
 
-        GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock.getName();
-        GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock.getPrice().ToString("c", numberFormat)
+        GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
+        GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice().ToString("c", numberFormat)
         +"(" + rate.ToString("F2") + "%";
 
         if (rate > 0)
@@ -37,7 +37,11 @@ public class StockDetailDisplay : MonoBehaviour
             GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(129, 128, 131, 255);
         }
 
-        GameObject.Find("StockDetailDesc").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock.getDesc();
+        GameObject.Find("StockDetailDesc").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getDesc();
+
+        //
+        print("LISDTL DAY"+ GameObject.Find("Player").GetComponent<Player>().GetDay() + "LISDTL TIME: " + GameObject.Find("Player").GetComponent<Player>().GetTime());
+        //
 
         //var plt = new ScottPlot.Plot(600, 400);
         //plt.AddSignal(GameObject.Find("Stocks").GetComponent<Stocks>().getRecordDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().stock, 15));

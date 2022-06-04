@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
      * 2022.06.04
      * 
      * using StockDOGE 추가
-     * Date = 1 로 수정
+     * Date = 0 으로 수정
      * public static int DateEndGame 추가
      * public static int Time 추가
      * public static int[] TimeTurns 추가
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
      * void InitPlay() 추가
      * void refresh() 추가
      * 
-     * 박동옥
+     * 작성자. 박동옥
      */
     public static int DateEndGame = 31; // 마지막 날.
     public static int Time = (int)SettingsStock.TIME_START_OF_DAY; // 첫 시간
@@ -183,5 +183,6 @@ public class Player : MonoBehaviour
     public void refresh()
     {
         GameObject.Find("StockListAll").GetComponent<SecuritiesStockListAll>().refresh();
+        GameObject.Find("StockDetailDisplay").GetComponent<StockDetailDisplay>().refresh();
     }
 }

@@ -30,6 +30,14 @@ public class Stocks : MonoBehaviour
 
     private Stock[] stocks;
 
+    struct StockBought
+    {
+        public Stock stock;
+        public int count;
+        public int moneySpent;
+    }
+    private StockBought[] stocksOwn;
+
     void Start()
     {
         this.init();
@@ -37,6 +45,13 @@ public class Stocks : MonoBehaviour
 
     void init()
     {
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
+         * 
+         * create new Stocks
+         *
+         * 
+         *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
         stockSamsung = new Stock("사성전자", 68000, (int)SettingsStock.RECORD_LENGTH_MAX);
         stockKakao = new Stock("까까오", 83000, (int)SettingsStock.RECORD_LENGTH_MAX);
         stockHyundai = new Stock("현재자동차", 186500, (int)SettingsStock.RECORD_LENGTH_MAX);
@@ -62,8 +77,8 @@ public class Stocks : MonoBehaviour
          * 
          * generate stock price history. before start playing.
          *
-         * 
          *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
         for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
             //모든 주식에 대해
         {
@@ -71,6 +86,71 @@ public class Stocks : MonoBehaviour
                 //1시간당 업데이트 횟수 * 하루는 몇 시간 * preplay 는 며칠인지
             {
                 stocks[i].updateGaussian();
+            }
+        }
+
+
+
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
+         * 
+         * stocksOwn initialization.
+         * 
+         *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        stocksOwn = new StockBought[stocks.Length];
+        for (int i = 0; i < stocksOwn.Length; i++)
+        {
+            stocksOwn[i].stock = stocks[i];
+            stocksOwn[i].count = 0;
+            stocksOwn[i].moneySpent = 0;
+        }
+
+
+
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
+         * 
+         * set Stocks Descriptions.
+         *
+         *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        stockSamsung.setDesc("삼성전자 설명이 어쩌고 저쩌고");
+        stockKakao.setDesc("카카오 설명이 어쩌고 저쩌고");
+        stockHyundai.setDesc("현대 설명이 어쩌고 저쩌고");
+        stockSk.setDesc("애스끼 설명이 어쩌고 저쩌고");
+        stockLg.setDesc("엘쥐 설명이 어쩌고 저쩌고");
+        stockApple.setDesc("애플 설명이 어쩌고 저쩌고");
+        stockNaver.setDesc("네이버 설명이 어쩌고 저쩌고");
+        stockGoogle.setDesc("구글 설명이 어쩌고 저쩌고");
+        stockMega.setDesc("메가 설명이 어쩌고 저쩌고");
+
+
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
+         * 
+         * set Stocks attributes.
+         *
+         *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //stockSamsung
+        //stockKakao
+        //stockHyundai
+        //stockSk
+        //stockLg
+        //stockApple
+        //stockNaver
+        //stockGoogle
+        //stockMega
+
+
+    }
+
+    public void BuyStock(Stock stock, int count)
+    {
+        for (int i = 0; i < stocksOwn.Length; i++)
+        {
+            if (stocksOwn[i].stock.getName().Equals(stock.getName()))
+            {
+                stocksOwn[i].count += count;
+                stocksOwn[i].moneySpent += (int)(stock.getPrice() * count);
             }
         }
     }
@@ -86,6 +166,7 @@ public class Stocks : MonoBehaviour
                 stocks[i].updateGaussian();
             }
         }
+        print("UPDATED");
     }
 
     public int getStocksCount()

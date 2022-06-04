@@ -57,6 +57,9 @@ public class SecuritiesStockListAll : MonoBehaviour
             }
 
         }
+
+        print("LISALL DAY" + GameObject.Find("Player").GetComponent<Player>().GetDay() + " LISALL TIME: " + GameObject.Find("Player").GetComponent<Player>().GetTime());
+
     }
 
     public void delete()

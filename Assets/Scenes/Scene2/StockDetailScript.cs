@@ -9,11 +9,15 @@ public class StockDetailScript : MonoBehaviour
 {
     
 
-    public Stock stock;
+    public string stockName;
 
-    public void setStock(string stockName)
+    public void setStockName(string stockName)
     {
-        this.stock = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(stockName);
+        this.stockName = stockName;
+    }
+    public Stock getStock()
+    {
+        return GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(this.stockName);
     }
     // Start is called before the first frame update
     //void Start()
