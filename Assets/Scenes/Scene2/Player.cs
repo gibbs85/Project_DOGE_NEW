@@ -7,7 +7,7 @@ using StockDOGE;
 
 public class Player : MonoBehaviour
 {
-    public static int Money = 150;
+    public static int Money = 3000000;
     public static int Saving = 0;
     public static int Investment = 0;
     public static int Day = 2; //0=토요일, 2=월요일 .... 6 = 금요일
