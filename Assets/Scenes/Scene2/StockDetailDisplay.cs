@@ -27,7 +27,7 @@ public class StockDetailDisplay : MonoBehaviour
 
         GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
         GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice().ToString("c", numberFormat)
-        +"(" + rate.ToString("F2") + "%";
+        +"(" + rate.ToString("F2") + "%)";
 
         if (rate > 0)
         {

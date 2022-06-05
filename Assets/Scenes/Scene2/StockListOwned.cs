@@ -35,7 +35,7 @@ public class StockListOwned : MonoBehaviour
         GameObject.Find("StockListOwnMoneySpentAll").GetComponentInChildren<TextMeshProUGUI>().text = this.moneySpentAll.ToString("c", numberFormat);
         GameObject.Find("StockListOwnMoneySellAll").GetComponentInChildren<TextMeshProUGUI>().text = this.moneySellAll.ToString("c", numberFormat); ;
         GameObject.Find("StockListOwnProfit").GetComponentInChildren<TextMeshProUGUI>().text =
-            this.moneyProfit.ToString("c", numberFormat) + "(" + this.profitRate.ToString("F2") + "%";
+            this.moneyProfit.ToString("c", numberFormat) + "(" + this.profitRate.ToString("F2") + "%)";
 
         if (this.profitRate > 0)
         {

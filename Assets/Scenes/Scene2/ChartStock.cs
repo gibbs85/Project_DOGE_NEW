@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Globalization;
 
 public class ChartStock : MonoBehaviour
 {
+    NumberFormatInfo numberFormat;
+
     public int countRecordHour = (int)(SettingsStock.COUNT_UPDATE_PER_HOUR);
+
+    public int countDays = 1;
 
     private double[] data;
     private double[] dataToChart;
@@ -19,26 +26,56 @@ public class ChartStock : MonoBehaviour
     private float graph_Width;
     private float graph_Height;
 
-
-    void OnEnable()
+    public double getPriceOld()
     {
+        return this.dataToChart[0];
+    }
+
+    public double getPriceNow()
+    {
+        return this.dataToChart[^1];
+    }
+
+    public void start()
+    {
+        this.setDays(1);
+    }
+    public void init()
+    {
+        this.setDays(1);
         this.refresh();
+    }
+
+    public void setDays(int n)
+    {
+        this.countDays = n;
     }
 
     public void refresh()
     {
+        numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
+
         int countchild = GameObject.Find("ChartStock").transform.Find("DotGroup").childCount;
-
         for (int i = 0; i < countchild; i++)
-        {
             Destroy(GameObject.Find("ChartStock").transform.Find("DotGroup").GetChild(i).gameObject);
-        }
 
-        this.graph_Width = 180.0f;
-        this.graph_Height = 120.0f;
+        countchild = GameObject.Find("ChartStock").transform.Find("LineGroup").childCount;
+        for (int i = 0; i < countchild; i++)
+            Destroy(GameObject.Find("ChartStock").transform.Find("LineGroup").GetChild(i).gameObject);
+
+        this.graph_Width = 160.0f;
+        this.graph_Height = 110.0f;
 
         this.getData();
-        this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)SettingsStock.TIME_START_OF_DAY) * (int)SettingsStock.COUNT_UPDATE_PER_HOUR);
+
+        if(this.countDays == 1)
+            this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY))*(int)(SettingsStock.COUNT_UPDATE_PER_HOUR));
+        //else
+        //    this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY)) * (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) + (      ((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays-1)) * 6)     )   );
+        else
+            this.chartNrecords(((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays)) * (int)(SettingsStock.TIME_END_OF_DAY)));
+
+
     }
 
     public void getData()
@@ -78,6 +115,10 @@ public class ChartStock : MonoBehaviour
             readIndex--;
         }
 
+        GameObject.Find("TextStockChartMax").GetComponentInChildren<TextMeshProUGUI>().text = ((int)(maxData)).ToString("c", numberFormat);
+        GameObject.Find("TextStockChartMid").GetComponentInChildren<TextMeshProUGUI>().text = ((int)( (maxData+minData) / 2)).ToString("c", numberFormat);
+        GameObject.Find("TextStockChartMin").GetComponentInChildren<TextMeshProUGUI>().text = ((int)(minData)).ToString("c", numberFormat);
+
         float maxDataOffset = (float)(maxData / maxData);   //1
         float minDataOffset = (float)(minData / maxData);   //0.8~
 
@@ -85,6 +126,7 @@ public class ChartStock : MonoBehaviour
         float startPosition = -this.graph_Width / 2;
         float maxYPosition = this.graph_Height / 2;
 
+        Vector2 prevDotPos = Vector2.zero;
         //print("MAX :" + maxData);
         //print("MIN :" + minData);
         //print("MAXOFFSET : " + maxDataOffset);
@@ -96,17 +138,68 @@ public class ChartStock : MonoBehaviour
             float dataOffset = (float)(this.dataToChart[i] / maxData); // 0.9~
             float yPosOffset = (float)(2*((dataOffset - minDataOffset)/(maxDataOffset - minDataOffset))-1);  // 0.5
 
-            //print("IN FOR DataToChart[" + i + "] = " + this.dataToChart[i]);
-            //if (yPosOffset > 1 || yPosOffset < 0)
-            //    print("yPosOffset OVER: " + yPosOffset);
-            if (this.dataToChart[i] > maxData || this.dataToChart[i] < minData)
-                print("dataToChart OVER: " + dataToChart[i]);
             GameObject dot = Resources.Load<GameObject>("Prefabs/ChartDot");
             GameObject Instance = (GameObject)Instantiate(dot, GameObject.Find("ChartStock").transform.Find("DotGroup"));
 
             RectTransform dotRT = dot.GetComponent<RectTransform>();
             dotRT.anchoredPosition = new Vector2(startPosition + (graph_Width / (n - 1) * i), maxYPosition * yPosOffset);   // 최대 높이 * 0.0~1.0
-            print(maxYPosition * yPosOffset);
+
+            if (i == 0)
+            {
+                prevDotPos = dotRT.anchoredPosition;
+                continue;
+            }
+
+            GameObject line = Resources.Load<GameObject>("Prefabs/ChartLine");
+            GameObject InstanceLine = Instantiate(line, GameObject.Find("ChartStock").transform.Find("LineGroup"));
+            InstanceLine.transform.localScale = Vector3.one;
+
+            RectTransform lineRT = InstanceLine.GetComponent<RectTransform>();
+
+            float lineWidth = Vector2.Distance(prevDotPos, dotRT.anchoredPosition);
+            float xPos = (prevDotPos.x + dotRT.anchoredPosition.x) / 2;
+            float yPos = (prevDotPos.y + dotRT.anchoredPosition.y) / 2;
+
+            Vector2 dir = (dotRT.anchoredPosition - prevDotPos).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            lineRT.anchoredPosition = new Vector2(xPos, yPos);
+            lineRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lineWidth);
+            lineRT.localRotation = Quaternion.Euler(0f, 0f, angle);
+
+            //GameObject maskPanel = Instantiate(GameObject.Find("ChartStock").transform.Find("LineGroup").transform.Find("MaskPanel").gameObject, Vector3.zero, Quaternion.identity);
+            //maskPanel.transform.SetParent(GameObject.Find("ChartStock").transform.Find("LineGroup"));
+            //maskPanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            //maskPanel.transform.SetParent(InstanceLine.transform);
+
+            if (this.dataToChart[^1] > this.dataToChart[0])
+                InstanceLine.GetComponent<Image>().color = new Color32(255, 38, 4, 255);
+            else if (this.dataToChart[^1] < this.dataToChart[0])
+                InstanceLine.GetComponent<Image>().color = new Color32(0, 112, 192, 255);
+            else
+                InstanceLine.GetComponent<Image>().color = new Color32(129, 128, 131, 255);
+
+
+            prevDotPos = dotRT.anchoredPosition;
         }
+
+        double rate = ((this.dataToChart[^1] / this.dataToChart[0]) - 1) * 100;
+        GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
+        GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice().ToString("c", numberFormat)
+        + "(" + rate.ToString("F2") + "%)";
+
+        if (rate > 0)
+        {
+            GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(255, 38, 4, 255);
+        }
+        else if (rate < 0)
+        {
+            GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(0, 112, 192, 255);
+        }
+        else
+        {
+            GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(129, 128, 131, 255);
+        }
+
+        GameObject.Find("StockDetailDesc").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getDesc();
     }
 }
