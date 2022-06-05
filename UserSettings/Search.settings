@@ -7,7 +7,7 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.8440E7BB" = "nuget"
+	"last_search.8440E7BB" = "consol"
 	"OpenInspectorPreview.8440E7BB" = "0"
 	"currentGroup.8440E7BB" = "all"
 }

@@ -16,6 +16,7 @@ public class OpenStockDetail : MonoBehaviour
         GameObject.Find("AppStock").transform.Find("StockDetail").gameObject.SetActive(true);
         GameObject.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().setStockName(stockName);
         GameObject.Find("StockDetail").GetComponent<StockDetailDisplay>().refresh();
+        GameObject.Find("ChartStock").GetComponent<ChartStock>().refresh();
 
         GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
         GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(false);
