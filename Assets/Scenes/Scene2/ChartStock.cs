@@ -73,7 +73,7 @@ public class ChartStock : MonoBehaviour
         //else
         //    this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY)) * (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) + (      ((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays-1)) * 6)     )   );
         else
-            this.chartNrecords(((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays)) * (int)(SettingsStock.TIME_END_OF_DAY)));
+            this.sampleData(((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays)) * (int)(SettingsStock.TIME_END_OF_DAY)));
 
 
     }
@@ -82,6 +82,35 @@ public class ChartStock : MonoBehaviour
     {
         string stockName = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStockName();
         this.data = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(stockName).getPriceRecord();
+    }
+
+    public void sampleData(int n)
+    {
+        print("ORIGIN :" + this.data.Length);
+        int sampleRateDay = 1;      // n 27000
+
+        int writeIndex = 0;
+        int readIndex = n;
+        int sampleRate = (n / (((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * (sampleRateDay) * (int)(SettingsStock.TIME_END_OF_DAY)))) +1;
+        int sampleCount = (n / sampleRate);
+        double[] dataSampled = new double[sampleCount];       // 6700ป๙วร
+        print("SAMPLE :" + dataSampled.Length);
+
+        while (readIndex > sampleRate)
+        {
+            print("WriteIndex :" + writeIndex);
+            print("ReadIndex :" + readIndex);
+            dataSampled[writeIndex] = this.data[^readIndex]; 
+            writeIndex++;
+            //readIndex = readIndex - (n / dataSampled.Length);
+            readIndex = readIndex - sampleRate;
+        }
+        dataSampled[^1] = this.data[^1];
+        print("HERE");
+        //print("SAMPLE :"+dataSampled.Length);
+        this.data = dataSampled;
+        this.chartNrecords(sampleCount);
+        
     }
 
     public void chartNrecords(int n)
