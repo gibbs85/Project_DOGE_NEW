@@ -116,16 +116,15 @@ public class Stocks : MonoBehaviour
          *
          *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        stockSamsung.setMean(1.00001);
-        stockSamsung.setStd(0.002);
-        //stockKakao
-        //stockHyundai
-        //stockSk
-        //stockLg
-        //stockApple
-        //stockNaver
-        //stockGoogle
-        //stockMega
+        stockSamsung.setMean(1.00001); stockSamsung.setStd(0.0015);
+        stockKakao.setMean(1.000005); stockKakao.setStd(0.003);
+        stockHyundai.setMean(1.00001); stockHyundai.setStd(0.0012);
+        stockSk.setMean(1.00001); stockSk.setStd(0.001);
+        stockLg.setMean(1.000003); stockLg.setStd(0.0025);
+        stockApple.setMean(1.00002); stockApple.setStd(0.0017);
+        stockNaver.setMean(1.00001); stockNaver.setStd(0.0029);
+        stockGoogle.setMean(1.00001); stockGoogle.setStd(0.0010);
+        stockMega.setMean(1.00001); stockMega.setStd(0.0022);
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////
          * 
          * generate stock price history. before start playing.

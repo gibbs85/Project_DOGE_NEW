@@ -27,8 +27,6 @@ public class MainManager : MonoBehaviour
     public GameObject DefaultScreen;
     public GameObject BankScreen;
     public GameObject StockScreen;
-    public GameObject SettingScreen;
-    public GameObject SaveScreen;
 
     private GameObject currentScreen;
     private GameObject previousScreen;
@@ -50,8 +48,6 @@ public class MainManager : MonoBehaviour
         AppHighlight.SetActive(false);
 
         // Set First Screen
-        SaveScreen.SetActive(false);
-        SettingScreen.SetActive(false);
         StockScreen.SetActive(false);
         BankScreen.SetActive(false);
         DefaultScreen.SetActive(true);
@@ -189,7 +185,7 @@ public class MainManager : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
-            if(!appHighlighted && isTutorial)
+            if (!appHighlighted && isTutorial)
                 flag++;
         }
     }
@@ -201,16 +197,22 @@ public class MainManager : MonoBehaviour
         currentScreen = newScreen;
         currentScreen.SetActive(true);
     }
-    
+
     private void EnableAppHighlight(Vector3 pos, Vector3 scale)
     {
-        AppHighlight.transform.position = pos;
+        Vector3 Hpos = new Vector3(pos.x, pos.y, 1.0f);
+        AppHighlight.transform.position = Hpos;
         AppHighlight.transform.localScale = scale;  
         AppHighlight.SetActive(true);
         appHighlighted = true;
     }
 
-    private void OnClickAppHighlight() { flag++; appHighlighted = false; AppHighlight.SetActive(false); }
+    public void OnClickAppHighlight() 
+    {
+        flag++; 
+        appHighlighted = false; 
+        AppHighlight.SetActive(false); 
+    }
     
     public void OpenApp(GameObject newScene)
     {

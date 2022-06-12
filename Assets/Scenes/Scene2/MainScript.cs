@@ -136,14 +136,14 @@ public class MainScript : MonoBehaviour
         int Tired = Player.player.GetTired();
         if (Tired < tired)
             return false;
-        Tired -= tired;
+        //Tired -= tired;
+        Player.player.SetTired(Tired - tired);
 
         return true;
     }
 
     public void nextDay()
     {
-        int Tired = Player.player.GetTired();
         print("nextDay");
         /*
          * 시간과 턴, 주식 업데이트 추가
@@ -152,7 +152,9 @@ public class MainScript : MonoBehaviour
         Time = TimeTurns[Turn];
         GameObject.Find("Stocks").GetComponent<Stocks>().UpdateAllStocks(TimeTurns[Turn] - TimeTurns[Turn - 1]);
 
-        Tired = 5;
+        //Tired = 5;
+        Player.player.SetTired(5);
+        int Tired = Player.player.GetTired();
 
         ObjTired5.SetActive(true);  //5번만 true
         ObjTired4.SetActive(false);
