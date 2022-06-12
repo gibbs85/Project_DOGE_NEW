@@ -43,7 +43,7 @@ public class StockBuyPage : MonoBehaviour
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyCount").GetComponentInChildren<TextMeshProUGUI>().text = this.stockCount + "주";
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyPriceCaled").GetComponentInChildren<TextMeshProUGUI>().text = this.stockPriceCaled.ToString("c", numberFormat);
         
-        if (this.stockPriceCaled > GameObject.Find("Player").GetComponent<Player>().GetMoney())
+        if (this.stockPriceCaled > Player.player.GetMoney())
         {
             GameObject.Find("StockBuyPage").transform.Find("TextStockBuyPriceCaled").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(255, 38, 4, 255);
         }
@@ -103,14 +103,14 @@ public class StockBuyPage : MonoBehaviour
 
     public void BuyConfirmClicked()
     {
-        if (this.stockPriceCaled > GameObject.Find("Player").GetComponent<Player>().GetMoney()) // 구매할 돈 없음
+        if (this.stockPriceCaled > Player.player.GetMoney()) // 구매할 돈 없음
             return;
 
-        if (GameObject.Find("Player").GetComponent<Player>().useTired(1) == false)
+        if (GameObject.Find("Main").GetComponent<MainScript>().useTired(1) == false)
             return;
 
         GameObject.Find("Stocks").GetComponent<Stocks>().BuyStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
-        GameObject.Find("Player").GetComponent<Player>().SetMoney(GameObject.Find("Player").GetComponent<Player>().GetMoney() - this.stockPriceCaled);
+        Player.player.SetMoney(Player.player.GetMoney() - this.stockPriceCaled);
         this.refresh();
     }
 }

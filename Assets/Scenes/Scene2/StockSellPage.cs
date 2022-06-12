@@ -113,11 +113,11 @@ public class StockSellPage : MonoBehaviour
     {
         if (this.stockCount > this.stockCountOwn) // 판매할 수 있는 양 부족
             return;
-        if (GameObject.Find("Player").GetComponent<Player>().useTired(1) == false)
+        if (GameObject.Find("Main").GetComponent<MainScript>().useTired(1) == false)
             return;
 
         GameObject.Find("Stocks").GetComponent<Stocks>().SellStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
-        GameObject.Find("Player").GetComponent<Player>().SetMoney(GameObject.Find("Player").GetComponent<Player>().GetMoney() + this.stockPriceCaled);
+        Player.player.SetMoney(Player.player.GetMoney() + this.stockPriceCaled);
         this.refresh();
     }
 }

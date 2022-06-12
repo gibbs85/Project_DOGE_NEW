@@ -23,6 +23,11 @@ public class StockListOwned : MonoBehaviour
         this.refresh();
     }
 
+    public int GetMoneySellAll()
+    {
+        return moneySpentAll;
+    }
+
     public void refresh()
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
@@ -70,7 +75,7 @@ public class StockListOwned : MonoBehaviour
                 int count = GameObject.Find("Stocks").GetComponent<Stocks>().stocksOwn[i].count;
                 int profit = sell - bought;
                 double profitRate = (double)profit / (double)bought * 100;
-                double rateDay = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Player").GetComponent<Player>().GetTime());
+                double rateDay = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Main").GetComponent<MainScript>().GetTime());
 
                 GameObject btn = Resources.Load<GameObject>("Prefabs/BtnContentStockListOwn");
                 GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("Viewport").transform.Find("Content"));

@@ -23,7 +23,7 @@ public class StockDetailDisplay : MonoBehaviour
     public void refresh()
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
-        double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), GameObject.Find("Player").GetComponent<Player>().GetTime());
+        double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), GameObject.Find("Main").GetComponent<MainScript>().GetTime());
 
         GameObject.Find("StockDetailTitle").transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
         GameObject.Find("StockDetailTitle").transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice().ToString("c", numberFormat)

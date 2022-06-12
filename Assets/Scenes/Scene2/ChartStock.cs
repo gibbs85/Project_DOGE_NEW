@@ -69,11 +69,12 @@ public class ChartStock : MonoBehaviour
         this.getData();
 
         if(this.countDays == 1)
-            this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY))*(int)(SettingsStock.COUNT_UPDATE_PER_HOUR));
+            this.chartNrecords((GameObject.Find("Main").GetComponent<MainScript>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY))*(int)(SettingsStock.COUNT_UPDATE_PER_HOUR));
         //else
         //    this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY)) * (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) + (      ((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays-1)) * 6)     )   );
         else
-            this.sampleData(((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays)) * (int)(SettingsStock.TIME_END_OF_DAY)));
+            //this.sampleData(         ( (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays)) * (int)(SettingsStock.TIME_END_OF_DAY))           );
+            this.sampleData(           ( (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((int)SettingsStock.TIME_END_OF_DAY - (int)SettingsStock.TIME_START_OF_DAY)  ) * this.countDays    );
 
 
     }
@@ -86,27 +87,28 @@ public class ChartStock : MonoBehaviour
 
     public void sampleData(int n)
     {
-        print("ORIGIN :" + this.data.Length);
+        //print("ORIGIN :" + this.data.Length);
         int sampleRateDay = 1;      // n 27000
 
         int writeIndex = 0;
         int readIndex = n;
-        int sampleRate = (n / (((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * (sampleRateDay) * (int)(SettingsStock.TIME_END_OF_DAY)))) +1;
+        //int sampleRate = (n / (((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * (sampleRateDay) * (int)(SettingsStock.TIME_END_OF_DAY)))) +1;
+        int sampleRate = (n / ((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((int)SettingsStock.TIME_END_OF_DAY - (int)SettingsStock.TIME_START_OF_DAY)) * sampleRateDay) + 1;
         int sampleCount = (n / sampleRate);
         double[] dataSampled = new double[sampleCount];       // 6700샘플
-        print("SAMPLE :" + dataSampled.Length);
+        //print("SAMPLE :" + dataSampled.Length);
 
         while (readIndex > sampleRate)
         {
-            print("WriteIndex :" + writeIndex);
-            print("ReadIndex :" + readIndex);
+            //print("WriteIndex :" + writeIndex);
+            //print("ReadIndex :" + readIndex);
             dataSampled[writeIndex] = this.data[^readIndex]; 
             writeIndex++;
             //readIndex = readIndex - (n / dataSampled.Length);
             readIndex = readIndex - sampleRate;
         }
         dataSampled[^1] = this.data[^1];
-        print("HERE");
+        //print("HERE");
         //print("SAMPLE :"+dataSampled.Length);
         this.data = dataSampled;
         this.chartNrecords(sampleCount);
@@ -168,7 +170,7 @@ public class ChartStock : MonoBehaviour
             float yPosOffset = (float)(2*((dataOffset - minDataOffset)/(maxDataOffset - minDataOffset))-1);  // 0.5
 
             GameObject dot = Resources.Load<GameObject>("Prefabs/ChartDot");
-            GameObject Instance = (GameObject)Instantiate(dot, GameObject.Find("ChartStock").transform.Find("DotGroup"));
+            //GameObject Instance = (GameObject)Instantiate(dot, GameObject.Find("ChartStock").transform.Find("DotGroup"));
 
             RectTransform dotRT = dot.GetComponent<RectTransform>();
             dotRT.anchoredPosition = new Vector2(startPosition + (graph_Width / (n - 1) * i), maxYPosition * yPosOffset);   // 최대 높이 * 0.0~1.0

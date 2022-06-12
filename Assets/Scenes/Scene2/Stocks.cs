@@ -74,22 +74,7 @@ public class Stocks : MonoBehaviour
         stocks[7] = stockGoogle;
         stocks[8] = stockMega;
 
-        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
-         * 
-         * generate stock price history. before start playing.
-         *
-         *//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
-            //모든 주식에 대해
-        {
-            for (int j = 0; j < (int)SettingsStock.COUNT_UPDATE_PER_HOUR * (int)SettingsStock.COUNT_HOUR_PER_DAY * (int)SettingsStock.COUNT_UPDATE_DAYS_PREPLAY; j++)
-                //1시간당 업데이트 횟수 * 하루는 몇 시간 * preplay 는 며칠인지
-            {
-                stocks[i].updateGaussian();
-            }
-        }
-
+        
 
 
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +116,8 @@ public class Stocks : MonoBehaviour
          *
          *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //stockSamsung
+        stockSamsung.setMean(1.00001);
+        stockSamsung.setStd(0.002);
         //stockKakao
         //stockHyundai
         //stockSk
@@ -140,6 +126,21 @@ public class Stocks : MonoBehaviour
         //stockNaver
         //stockGoogle
         //stockMega
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////
+         * 
+         * generate stock price history. before start playing.
+         *
+         *//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        for (int i = 0; i < (int)SettingsStock.COUNT_STOCKS; i++)
+        //모든 주식에 대해
+        {
+            for (int j = 0; j < (int)SettingsStock.COUNT_UPDATE_PER_HOUR * (int)SettingsStock.COUNT_HOUR_PER_DAY * (int)SettingsStock.COUNT_UPDATE_DAYS_PREPLAY; j++)
+            //1시간당 업데이트 횟수 * 하루는 몇 시간 * preplay 는 며칠인지
+            {
+                stocks[i].updateGaussian();
+            }
+        }
 
 
     }
@@ -154,6 +155,7 @@ public class Stocks : MonoBehaviour
                 stocksOwn[i].moneySpent += (int)(stock.getPrice() * count);
             }
         }
+        
     }
 
     public void SellStock(Stock stock, int count)

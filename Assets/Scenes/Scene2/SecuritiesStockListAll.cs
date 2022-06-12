@@ -40,7 +40,7 @@ public class SecuritiesStockListAll : MonoBehaviour
 
         for (int i = 0; i < GameObject.Find("Stocks").GetComponent<Stocks>().getStocksCount(); i++)
         {
-            double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Player").GetComponent<Player>().GetTime());
+            double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Main").GetComponent<MainScript>().GetTime());
 
             GameObject btn = Resources.Load<GameObject>("Prefabs/StockButtonContentListAll");
             GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("StockListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));

@@ -10,15 +10,15 @@ public class BankSavingUpdater : MonoBehaviour
 
     public void btnAddSaving()
     {
-        int money = GameObject.Find("Player").GetComponent<Player>().GetMoney();
-        int day = GameObject.Find("Player").GetComponent<Player>().GetDay();
-        int tired = GameObject.Find("Player").GetComponent<Player>().GetTired();
+        int money = Player.player.GetMoney();
+        int day = GameObject.Find("Main").GetComponent<MainScript>().GetDay();
+        int tired = Player.player.GetTired();
         if (intsaving <= money && day == 0 && tired >= 2) { //적금 금액이 현재 돈 이하 && 토요일 && 피로도 2이상
-            GameObject.Find("Player").GetComponent<Player>().SetSaving(intsaving);
+            Player.player.SetSaving(intsaving);
             money -= intsaving;
-            GameObject.Find("Player").GetComponent<Player>().SetMoney(money);
+            Player.player.SetMoney(money);
             tired -= 2;
-            GameObject.Find("Player").GetComponent<Player>().SetTired(tired);
+            Player.player.SetTired(tired);
         }
         txtSaving.text = "0원";
         intsaving = 0;
