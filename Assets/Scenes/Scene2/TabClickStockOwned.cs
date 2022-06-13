@@ -7,6 +7,7 @@ public class TabClickStockOwned : MonoBehaviour
 {
     public void clicked(bool isOn)
     {
+        print("clicked");
         GameObject.Find("AppStock").transform.Find("StockListAll").gameObject.SetActive(false);
         GameObject.Find("AppStock").transform.Find("StockListOwned").gameObject.SetActive(true);
         GameObject.Find("AppStock").transform.Find("StockListOwned").GetComponent<StockListOwned>().init();

@@ -27,7 +27,7 @@ public class Stocks : MonoBehaviour
         stockApple,
         stockNaver,
         stockGoogle,
-        stockMega;
+        stockMeka;
 
     private Stock[] stocks;
 
@@ -61,7 +61,7 @@ public class Stocks : MonoBehaviour
         stockApple = new Stock("아플", 175254, (int)SettingsStock.RECORD_LENGTH_MAX);
         stockNaver = new Stock("네버", 275000, (int)SettingsStock.RECORD_LENGTH_MAX);
         stockGoogle = new Stock("구귤", 2774420, (int)SettingsStock.RECORD_LENGTH_MAX);
-        stockMega = new Stock("MEGA", 50000, (int)SettingsStock.RECORD_LENGTH_MAX);
+        stockMeka = new Stock("MEKA", 50000, (int)SettingsStock.RECORD_LENGTH_MAX);
 
         stocks = new Stock[(int)SettingsStock.COUNT_STOCKS];
         stocks[0] = stockSamsung;
@@ -72,7 +72,7 @@ public class Stocks : MonoBehaviour
         stocks[5] = stockApple;
         stocks[6] = stockNaver;
         stocks[7] = stockGoogle;
-        stocks[8] = stockMega;
+        stocks[8] = stockMeka;
 
         
 
@@ -99,15 +99,15 @@ public class Stocks : MonoBehaviour
          *
          *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        stockSamsung.setDesc("삼성전자 설명이 어쩌고 저쩌고");
-        stockKakao.setDesc("카카오 설명이 어쩌고 저쩌고");
-        stockHyundai.setDesc("현대 설명이 어쩌고 저쩌고");
-        stockSk.setDesc("애스끼 설명이 어쩌고 저쩌고");
-        stockLg.setDesc("엘쥐 설명이 어쩌고 저쩌고");
-        stockApple.setDesc("애플 설명이 어쩌고 저쩌고");
-        stockNaver.setDesc("네이버 설명이 어쩌고 저쩌고");
-        stockGoogle.setDesc("구글 설명이 어쩌고 저쩌고");
-        stockMega.setDesc("메가 설명이 어쩌고 저쩌고");
+        stockSamsung.setDesc("전국민이 하나씩은 들고있는 든든한 국밥같은 주식. 우리나라 대표기업 주식총액 1위. 최근 나스닥의 부진으로 나름 호황인것같다");
+        stockKakao.setDesc("은행이면 은행 게임이면 게임. 플랫폼 사업으로 떠오르는 기업. 까까오가 뭘할지 알면 테마주 흐름을 알 수 있다는 말이 있다");
+        stockHyundai.setDesc("부동의 자동차 기업 1위. 새로 나온 전기차 모델이 예쁘게 잘 뽑혔다. 해외에서도 안정성면에서 반응이 좋은편");
+        stockSk.setDesc("통신사 시장점유율 1위. 최근에는 KT에 비해 비교적 부진한 모습을 보이고 있다. 무난하게 좋은 종목");
+        stockLg.setDesc("최근 같은 계열사인 에너지솔루션이 떨어져나가면서 조금 손실을 봤다. 하지만 우리나라 내에선 사성 다음가는 기업인 만큼 기대치는 높다. 공장 사고로 인해 최근 주가가 조금 떨어졌다");
+        stockApple.setDesc("세계 1위 스마트폰 기업. 해외주식 1위 종목이었지만 여러 주식들이 무너지면서 현재 가격이 많이 떨어져있다. 종목은 나쁘지 않지만 해외 주식시장이 전체적으로 침체기인듯하다");
+        stockNaver.setDesc("얼마전까진 부동의 플랫폼 1위 기업이었으나 빠른 속도로 사업영역을 넓히는 까까오에게 밀렸다. 제페토와 같은 메타버스 아이템으로 최근 이목을 끌었다");
+        stockGoogle.setDesc("세계 최대 검색 플랫폼. 모험보다는 이미지를 생각하는 기업. 종목은 나쁘지 않지만 해외 주식시장이 전체적으로 침체기인듯하다");
+        stockMeka.setDesc("메타버스 사업에 뛰어든다하여 주가가 잠깐 올랐다. 하지만 최근 실적이 많이 부진하다. 악재에 겹쳐서 해외 주식시장이 전체적으로 침체기인듯하다");
 
 
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ public class Stocks : MonoBehaviour
         stockApple.setMean(1.00002); stockApple.setStd(0.0017);
         stockNaver.setMean(1.00001); stockNaver.setStd(0.0029);
         stockGoogle.setMean(1.00001); stockGoogle.setStd(0.0010);
-        stockMega.setMean(1.00001); stockMega.setStd(0.0022);
+        stockMeka.setMean(1.00001); stockMeka.setStd(0.0022);
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////
          * 
          * generate stock price history. before start playing.

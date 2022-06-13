@@ -85,7 +85,7 @@ public class StockListOwned : MonoBehaviour
                 Instance.transform.Find("TextStockListOwnMoneyBought").GetComponentInChildren<TextMeshProUGUI>().text = "매입금액: " + bought.ToString("c", numberFormat);
                 Instance.transform.Find("TextStockListOwnMoneySell").GetComponentInChildren<TextMeshProUGUI>().text = "평가금액: " + sell.ToString("c", numberFormat);
                 Instance.transform.Find("TextStockListOwnCount").GetComponentInChildren<TextMeshProUGUI>().text = "보유수량: " + count.ToString() + "주";
-                Instance.transform.Find("TextStockListOwnProfit").GetComponentInChildren<TextMeshProUGUI>().text = "수익률: " + profit.ToString() + "(" + profitRate.ToString("F2") + "%)";
+                Instance.transform.Find("TextStockListOwnProfit").GetComponentInChildren<TextMeshProUGUI>().text = "수익률: " + profit.ToString("c", numberFormat) + "(" + profitRate.ToString("F2") + "%)";
 
                 if(rateDay > 0)
                     Instance.transform.Find("TextStockListOwnPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(255, 38, 4, 255);
